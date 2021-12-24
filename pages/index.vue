@@ -13,7 +13,7 @@
             a(href="https://vuestripe.com/stripe-checkout/one-time-payment"  target="_blank") See Docs
           v-card-text.text-center
             img(width="200" src="../assets/common-sense.jpeg")
-            h2 Buy common sense for $10.00
+            h2 Buy common sense for $10.000
             stripe-checkout(
               ref="checkoutRef"
               mode="payment"
