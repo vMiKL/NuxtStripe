@@ -1,5 +1,6 @@
 export default {
   target: 'static', // default is 'server'
+  generate: {fallback: true},
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - vue-stripe-checkout-nuxt-demo',
