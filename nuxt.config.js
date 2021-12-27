@@ -20,8 +20,7 @@ export default {
 
   env: {
     SITE_NAME: `${process.env.SITE_NAME}`,
-    STRIPE_PUBLISHABLE_KEY: `${process.env.STRIPE_PUBLISHABLE_KEY}`,
-    STRIPE_SECRET_KEY: `${process.env.STRIPE_SECRET_KEY}`,
+    STRIPE_PK: `${process.env.STRIPE_PK}`,
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)

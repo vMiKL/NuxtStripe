@@ -72,7 +72,7 @@ import headMeta from '~/utils/head-meta';
 
 export default {
   data () {
-    this.pk = process.env.STRIPE_PK;
+    this.pk = 'pk_test_KRUvZiEQgpnKHiwV9rc88RjE';
     return {
       loading: false,
       lineItems: [
