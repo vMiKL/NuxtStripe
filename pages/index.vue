@@ -77,7 +77,7 @@ export default {
       loading: false,
       lineItems: [
         {
-          price: '10', // The id of the one-time price you created in your Stripe dashboard
+          price: 'price_1KBKLLLdPoxuSz0o2bEbH3kT', // The id of the one-time price you created in your Stripe dashboard
           quantity: 1,
         },
       ],
