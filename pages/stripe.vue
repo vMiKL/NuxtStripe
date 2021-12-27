@@ -5,7 +5,7 @@
     v-row(justify="center").mt-16
       v-col(cols="12" md="12").text-center
         img(width="150" src="../assets/vue-stripe-logo-variant-1-small.png")
-      v-col(cols="12" md="6")
+      v-col(cols="12" md="12")
         v-card(outlined)
           v-toolbar(flat color="#f7f7f7")
             h2 Stripe Checkout - One-time Payment
@@ -40,31 +40,6 @@
               :disabled="loading"
               @click="checkout"
             ).text-none Pay $10
-      v-col(cols="12" md="6")
-        v-card(outlined)
-          v-toolbar(flat color="#f7f7f7")
-            h2 Stripe Elements - Card
-            v-spacer
-            a(href="https://vuestripe.com/stripe-elements/card"  target="_blank") See Docs
-          v-card-text.pt-10
-            stripe-element-card(
-              ref="cardRef"
-              :pk="pk"
-              hide-postal-code
-              @token="tokenCreated"
-              @loading="v => loading = v"
-            )
-            pre {{token}}
-          v-card-actions
-            v-spacer
-            v-btn(
-              depressed
-              large
-              color="primary"
-              :loading="loading"
-              :disabled="loading"
-              @click="$refs.cardRef.submit()"
-            ).text-none Generate token
 </template>
 
 <script>
