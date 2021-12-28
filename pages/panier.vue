@@ -44,7 +44,7 @@ export default {
       loading: false,
       lineItems: [
         {
-          price: 'price_1KBKLLLdPoxuSz0o2bEbH3kT', // L'identifiant du prix unique que vous avez créé dans votre tableau de bord Stripe, création d'un article
+          amount: '1400', // L'identifiant du prix unique que vous avez créé dans votre tableau de bord Stripe, création d'un article
           quantity: 1,
         },
       ],
