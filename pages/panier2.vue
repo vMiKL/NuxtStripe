@@ -18,9 +18,10 @@
               ref="checkoutRef"
               mode="payment"
               :pk="pk"
-              :line-items="lineItems"
+              :items="items"
               :success-url="successURL"
               :cancel-url="cancelURL"
+              :price="price"
               @loading="v => loading = v"
             )
             br
@@ -50,10 +51,10 @@ export default {
     this.pk = 'pk_test_KRUvZiEQgpnKHiwV9rc88RjE';
     return {
       loading: false,
-      lineItems: [
+      items: [
         {
-          price: 'price_1KBKLLLdPoxuSz0o2bEbH3kT', // L'identifiant du prix unique que vous avez créé dans votre tableau de bord Stripe, création d'un article
           quantity: 1,
+          price: '1000',
         },
       ],
       token: null,
