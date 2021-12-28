@@ -1,37 +1,37 @@
 <template lang="pug">
-  v-container
-    v-row(justify="center").mt-16
-      v-col(cols="12" md="6")
-        v-card(outlined)
-          v-card-text.text-center
-            img(width="200" src="../assets/common-sense.jpeg")
-            h2 Buy common sense for $10.000
-            stripe-checkout(
-              ref="checkoutRef"
-              mode="payment"
-              :pk="pk"
-              :line-items="lineItems"
-              :success-url="successURL"
-              :cancel-url="cancelURL"
-              @loading="v => loading = v"
-            )
-            br
-            v-alert(
-              dark
-              v-if="redirectState"
-              :color="redirectState"
-              dismissible
-            ) Payment {{redirectState}}
-          v-card-actions
-            v-spacer
-            v-btn(
-              depressed
-              large
-              color="primary"
-              :loading="loading"
-              :disabled="loading"
-              @click="checkout"
-            ).text-none Pay $10
+v-container
+  v-row.mt-16(justify="center")
+    v-col(cols="12", md="6")
+      v-card(outlined)
+        v-card-text.text-center
+          img(width="200", src="../assets/common-sense.jpeg")
+          h2 Buy common sense for $10.000
+          stripe-checkout(
+            ref="checkoutRef",
+            mode="payment",
+            :pk="pk",
+            :line-items="lineItems",
+            :success-url="successURL",
+            :cancel-url="cancelURL",
+            @loading="(v) => (loading = v)"
+          )
+          br
+          v-alert(
+            dark,
+            v-if="redirectState",
+            :color="redirectState",
+            dismissible
+          ) Payment {{ redirectState }}
+        v-card-actions
+          v-spacer
+          v-btn.text-none(
+            depressed,
+            large,
+            color="primary",
+            :loading="loading",
+            :disabled="loading",
+            @click="checkout"
+          ) Pay $10
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
       loading: false,
       lineItems: [
         {
-          amount: '1400', // L'identifiant du prix unique que vous avez créé dans votre tableau de bord Stripe, création d'un article
+          price: 'price_1KBKLLLdPoxuSz0o2bEbH3kT', // L'identifiant du prix unique que vous avez créé dans votre tableau de bord Stripe, création d'un article
           quantity: 1,
         },
       ],
@@ -69,12 +69,10 @@ export default {
     }
   },
   methods: {
-    checkout () {
+    async checkout () {
       this.loading = true;
-      this.$refs.checkoutRef.redirectToCheckout();
-    },
-    tokenCreated (token) {
-      this.token = token;
+      const stripe = require('stripe')(this.pk);
+      await stripe.paymentIntents.create({ amount: 2000, currency: 'usd', payment_method_types: ['card'] });
     },
   },
   head () {
