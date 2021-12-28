@@ -1,37 +1,45 @@
 <template lang="pug">
-v-container
-  v-row.mt-16(justify="center")
-    v-col(cols="12", md="6")
-      v-card(outlined)
-        v-card-text.text-center
-          img(width="200", src="../assets/common-sense.jpeg")
-          h2 Buy common sense for $10.000
-          stripe-checkout(
-            ref="checkoutRef",
-            mode="payment",
-            :pk="pk",
-            :line-items="lineItems",
-            :success-url="successURL",
-            :cancel-url="cancelURL",
-            @loading="(v) => (loading = v)"
-          )
-          br
-          v-alert(
-            dark,
-            v-if="redirectState",
-            :color="redirectState",
-            dismissible
-          ) Payment {{ redirectState }}
-        v-card-actions
-          v-spacer
-          v-btn.text-none(
-            depressed,
-            large,
-            color="primary",
-            :loading="loading",
-            :disabled="loading",
-            @click="checkout"
-          ) Pay $10
+  v-container
+    //- v-row(justify="center")
+      v-col(cols="12" md="12").text-center
+    v-row(justify="center").mt-16
+      v-col(cols="12" md="12").text-center
+        img(width="150" src="../assets/vue-stripe-logo-variant-1-small.png")
+      v-col(cols="12" md="12")
+        v-card(outlined)
+          v-toolbar(flat color="#f7f7f7")
+            h2 Stripe Checkout - One-time Payment
+            v-spacer
+            a(href="https://vuestripe.com/stripe-checkout/one-time-payment"  target="_blank") See Docs
+          v-card-text.text-center
+            img(width="200" src="../assets/common-sense.jpeg")
+            h2 Buy common sense for $10.000
+            stripe-checkout(
+              ref="checkoutRef"
+              mode="payment"
+              :pk="pk"
+              :line-items="lineItems"
+              :success-url="successURL"
+              :cancel-url="cancelURL"
+              @loading="v => loading = v"
+            )
+            br
+            v-alert(
+              dark
+              v-if="redirectState"
+              :color="redirectState"
+              dismissible
+            ) Payment {{redirectState}}
+          v-card-actions
+            v-spacer
+            v-btn(
+              depressed
+              large
+              color="primary"
+              :loading="loading"
+              :disabled="loading"
+              @click="checkout"
+            ).text-none Pay $10
 </template>
 
 <script>
@@ -69,10 +77,9 @@ export default {
     }
   },
   methods: {
-    async checkout () {
+    checkout () {
       this.loading = true;
-      const stripe = require('stripe')(this.pk);
-      await stripe.paymentIntents.create({ amount: 2000, currency: 'usd', payment_method_types: ['card'] });
+      this.$refs.checkoutRef.redirectToCheckout();
     },
   },
   head () {
